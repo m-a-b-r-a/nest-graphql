@@ -41,21 +41,6 @@ export class LessonService {
         return await this.lessonRepo.find();
     }
 
-    async update(id:string,data:CreateLessonInput):Promise<LessonEntity>{
-    const lesson = await this.findOne(id);
-    Object.assign(lesson,data);
-    await lesson.save();
-    return lesson;
-    }
-
-    async delete(id:string):Promise<Boolean>{
-        const lesson = await this.findOne(id);
-        if(!lesson){
-            throw new NotFoundException('lesson not found');
-        }
-        await lesson.remove();
-        return true;
-    }
 
     async assingStudentsToLesson(lessonId:string,studentId:string[]){
         const lesson = await this.lessonRepo.findOne({
